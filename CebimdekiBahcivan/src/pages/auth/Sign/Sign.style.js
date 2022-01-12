@@ -15,11 +15,10 @@ export default StyleSheet.create({
         fontSize: Platform.OS === 'android' ? 120 : 160,
     },
     logo: {
-        with: Dimensions.get('window').width * 0.9,
-        heigth: Dimensions.get('window').height /3,
+        width: Dimensions.get('window').width * 0.9,
+        height: Dimensions.get('window').height /5,
         resizeMode: 'contain',
         alignSelf: 'center',
-        //tintColor: 'white',
     },
     logo_container: {
         flex: 1,

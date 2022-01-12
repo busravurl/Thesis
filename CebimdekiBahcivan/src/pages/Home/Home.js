@@ -1,21 +1,56 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView, Text, FlatList, View, Dimensions, StatusBar} from 'react-native';
+import axios from 'axios';
 const { width, height } = Dimensions.get('screen');
 
 
 function Home() {
-    const [plants, setPlants] = useState([
-        {name: 'Monstera ',title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', key: '1'},
-        {name: 'Aloe Vera',title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', key: '2'},
-        {name: 'Succulents',title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', key: '3'},
-        {name: 'ZZ Plant ',title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' , key: '4'},
-        {name: 'Pilea ',title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', key: '5'},
-    ]);
+    //   const [data, setData] = useState([]);
+
+
+    // async function fetchData() {
+    //     const response = await axios.get(
+    // 'http://192.168.43.184:45455/api/cebimdekibahcivan/blogyazisigetir'
+    //     );
+    //     //setLoading(false);
+    //     setData(response.data.content);
+    //     console.log('res'+ response.data.content);
+    // }
+    // const _render = ({item, index}) => {
+    //     return (
+           
+    //       <View style={{flexDirection: 'row', padding:25,marginBottom: 20 ,backgroundColor: 'rgba(225,225,225,0.18)' ,borderRadius: 12,
+    //                     shadowColor: "#000", 
+    //                     shadowOffset: {
+    //                         width:0,
+    //                         height:10
+    //                     },
+    //                     shadowOpacity: .4,
+    //                     shadowRadius: 10
+    //                 }}>
+                         
+
+    //                      <View>
+    //                          <Text style ={{fontSize: 22, marginLeft: 10, color:"#18A558"}}>{item.Baslik}</Text>
+    //                          <Text style ={{fontSize: 14, marginLeft: 10}}>{item.Aciklama}</Text>
+    //                      </View>
+                        
+                        
+    //                 </View>
+  
+    //     )
+    
+    // }
+
+    // useEffect(() => {
+    //     fetchData();
+    //     }, []);
+   
 
     return (
         <View style= {{flex: 1, backgroundColor: '#fff'}}>
-            <FlatList
-                data={plants}
+            {/* <FlatList
+                data={data}
                 //keyExtractor={(item)=> index.id()}
                 contentContainerStyle={{
                     padding: 25,
@@ -23,29 +58,10 @@ function Home() {
                     
                 }}
 
-                renderItem= {({item}) =>{
-                    return <View style={{flexDirection: 'row', padding:25,marginBottom: 20 ,backgroundColor: 'rgba(225,225,225,0.3)' ,borderRadius: 12,
-                        shadowColor: "#000", 
-                        shadowOffset: {
-                            width:0,
-                            height:10
-                        },
-                        shadowOpacity: .4,
-                        shadowRadius: 10
-                    }}>
-                         
-
-                         <View>
-                             <Text style ={{fontSize: 22, marginLeft: 10}}>{ item.name}</Text>
-                             <Text style ={{fontSize: 14, marginLeft: 10}}>{ item.title}</Text>
-                         </View>
-                        
-                        
-                    </View>
-            }}
+                renderItem= {_render}
    
-        />
-
+        /> */}
+            <Text>Home</Text>
     </View>
     );
 };

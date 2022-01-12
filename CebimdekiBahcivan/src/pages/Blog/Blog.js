@@ -11,16 +11,16 @@ function Blog() {
 
     async function fetchData() {
         const response = await axios.get(
-        `http://localhost:43369/api/CebimdekiBahcivan/BlogYazisiGetir`
+    'http://192.168.1.106:45455/api/cebimdekibahcivan/blogyazisigetir'
         );
-        setLoading(false);
-        setData(response.BlogYazisiGetir);
+        //setLoading(false);
+        setData(response.data.content);
+        console.log('res'+ response.data.content);
     }
-
     const _render = ({item, index}) => {
         return (
            
-          <View style={{flexDirection: 'row', padding:25,marginBottom: 20 ,backgroundColor: 'rgba(225,225,225,0.3)' ,borderRadius: 12,
+          <View style={{flexDirection: 'row', padding:25,marginBottom: 20 ,backgroundColor: 'rgba(225,225,225,0.18)' ,borderRadius: 12,
                         shadowColor: "#000", 
                         shadowOffset: {
                             width:0,
@@ -32,7 +32,7 @@ function Blog() {
                          
 
                          <View>
-                             <Text style ={{fontSize: 22, marginLeft: 10}}>{item.Baslik}</Text>
+                             <Text style ={{fontSize: 22, marginLeft: 10, color:"#18A558"}}>{item.Baslik}</Text>
                              <Text style ={{fontSize: 14, marginLeft: 10}}>{item.Aciklama}</Text>
                          </View>
                         

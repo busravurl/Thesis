@@ -7,15 +7,16 @@ export default StyleSheet.create({
         backgroundColor: '#fff',
     },
     logo: {
-        with: Dimensions.get('window').width * 0.9,
-        heigth: Dimensions.get('window').height /3,
+        width: Dimensions.get('window').width * 0.9,
+        height: Dimensions.get('window').height /5,
         resizeMode: 'contain',
         alignSelf: 'center',
-        //tintColor: 'white',
+        // tintColor: 'white',
     },
     logo_container: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center'
     },
     body_container: {
         flex: 1,

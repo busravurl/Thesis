@@ -11,6 +11,7 @@ import Search from './pages/Search';
 import Camera from './pages/Camera';
 import Blog from './pages/Blog';
 import Suggest from './pages/Suggest';
+import Profile from './pages/Profile';
 
 import colors from './styles/colors';
 
@@ -19,12 +20,12 @@ const SearchTab = 'Search';
 const CameraTab = 'Camera';
 const BlogTab = 'Blog';
 const SuggestTab = 'Suggest';
+const ProfileTab = 'Profile';
 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function App() {
 
   const AuthStack = () => {
         return(
@@ -36,14 +37,8 @@ function App() {
       );
   };
 
-  return(
-    <NavigationContainer>
-        {/*
-          <Stack.Navigator > 
-          <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown: false}}/>
-        </Stack.Navigator>
-         */}
-     
+  const DrawerTab = () => {
+      return(
         <Tab.Navigator  
         initialRouteName = {HomeTab}
         screenOptions= {({route}) => ({
@@ -61,6 +56,8 @@ function App() {
               iconName = focused ? 'newspaper' : 'newspaper-outline';
             }else if ( rn === SuggestTab) {
               iconName = focused ? 'bulb' : 'bulb-outline';
+            }else if ( rn === ProfileTab) {
+              iconName = focused ? 'person' : 'person-outline';
             }
 
             return <Ionicons name={iconName} size={size} color={color}/>
@@ -76,11 +73,33 @@ function App() {
         <Tab.Screen name={CameraTab} component={Camera}/>
         <Tab.Screen name={BlogTab} component={Blog}/>
         <Tab.Screen name={SuggestTab} component={Suggest}/>
+        <Tab.Screen name={ProfileTab} component={Profile}/>
       </Tab.Navigator>
-     
-      
-    </NavigationContainer>
-  );
-}
+      )
+  }
+  
 
-export default App;
+
+export default () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(!isLoading);
+      //setUser({});
+    }, 500);
+
+    
+  }, []);
+  
+  return (
+    <NavigationContainer>
+      { user ? (
+      <DrawerTab />
+      ):(
+      <AuthStack />
+      )}
+  </NavigationContainer>
+  );
+};
