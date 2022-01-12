@@ -1,163 +1,120 @@
-import React, {useState, useEffect} from 'react';
-import { SafeAreaView, View, Text, Image} from 'react-native';
-import styles from './Login.style';
-import axios from 'axios';
-import {Formik} from 'formik';
-import {showMessage} from 'react-native-flash-message';
 
-import authErrorMessageParser from '../../../utils/authErrorMessageParser';
+import axios from "axios";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  Button,
+  Platform,
+  TextInput,
+} from "react-native";
 
-import Input from '../../../components/Input/Input';
-import Button from '../../../components/Button/Button';
 
-const initialFormValues = {
-    KullaniciAdi: '',
-    Sifre: '',
-};
+export default function App() {
+  const [kullaniciAdi, setKullaniciAdi] = useState("");
+  const [sifre, setSifre] = useState("");
 
-const Login = ({navigation}) => {
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState();
-    const [kullaniciAdi, setKullaniciAdi] = useState("");
-    const [sifre, setSifre] = useState("");
-    // const [hidePassword, setHidePassword] = useState(true);
-    // const [message, setMessage] = useState();
-    // const [messageType, setMessageType] = useState();
+  const onChangeKullaniciAdiHandler = (kullaniciAdi) => {
+    setKullaniciAdi(kullaniciAdi);
+  };
 
-    // async function fetchData() {
-    //     const response = await axios.post(
-    //     'http://192.168.1.106:45455/api/cebimdekibahcivan/girisyap', {
-    //     kullaniciAdi,
-    //     sifre,
-    //   });
-    //         setLoading(false);
-    //         setData(response.data.content);
-    //         console.log(response.data.content);
-    // }
+  const onChangeSifreHandler = (sifre) => {
+    setSifre(sifre);
+  };
 
-    
-
-    function handleSignUp() {
-        navigation.navigate('SignPage');
-    }
-
-    const onSubmitFormHandler = async (event) => {
+  const onSubmitFormHandler = async (event) => {
     if (!kullaniciAdi.trim() || !sifre.trim()) {
       alert("Name or Email is invalid");
       return;
     }
-    setIsLoading(true);
+
     try {
-      const response = await axios.post(`http://192.168.1.106:45455/api/cebimdekibahcivan/girisyap`, {
-        KullaniciAdi,
-        Sifre,
+        console.log(kullaniciAdi)
+      const response = await axios.post('http://192.168.1.106:45457/api/cebimdekiBahcivan/girisYap', {
+        kullaniciAdi,
+        sifre,
       });
-      if (response.status === 200) {
-        alert(` You have created: ${JSON.stringify(response.data.content)}`);
-        setIsLoading(false);
-        setKullaniciAdi('');
-        setSifre('');
-      } else {
-        throw new Error("An error has occurred");
+      console.log(response)
+      if(response.state==='OK'){
+alert('Kullanıcı girişi başarılı! Hoşgeldin '+kullaniciAdi)
+
+      }else if(response.state==='NOK'){
+          alert('Kullanıcı adı veya şifre hatalı lütfen tekrar deneyiniz.')
       }
     } catch (error) {
-      alert("An error has occurred");
-      setIsLoading(false);
+      alert(error.message);
+       
     }
   };
 
-    //  async function handleFormSubmit(formValues) {
-    //     try {
-    //         setLoading(true);
-    //         await fetchData()(
-    //             formValues.KullaniciAdi,
-    //             formValues.Sifre
-            
-                
-    //         );
-    //         setLoading(false);
-        
-    //     } catch (error) {
-    //         showMessage({
-    //             message: authErrorMessageParser(error.code),
-    //             type: 'danger',
-    //         });
-    //         setLoading(false);
-    //     }
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View>
+        <View style={styles.wrapper}>
+          {(
+            <Text style={styles.formHeading}></Text>
+          )}
+        </View>
+        <View style={styles.wrapper}>
+          <TextInput
+            placeholder="Kullanıcı Adı"
+            placeholderTextColor="#ffffff"
+            style={styles.input}
+            value={kullaniciAdi}
+          
+            onChangeText={onChangeKullaniciAdiHandler}
+          />
+        </View>
+        <View style={styles.wrapper}>
+          <TextInput
+            placeholder="Sifre"
+            placeholderTextColor="#ffffff"
+            style={styles.input}
+            value={sifre}
+         
+            onChangeText={onChangeSifreHandler}
+          />
+        </View>
+        <View>
+          <Button
+            title="Giriş Yap"
+            onPress={onSubmitFormHandler}
+            style={styles.submitButton}
        
-    // }
+          />
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
 
-    // useEffect(() => {
-    //     fetchData();
-    //     }, []);
-   
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#252526",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  formHeading: {
+    color: "#ffffff",
+  },
+  wrapper: {
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 2,
+    borderColor: "grey",
+    minWidth: 200,
+    textAlignVertical: "center",
+    paddingLeft: 10,
+    borderRadius: 20,
+    color: "#ffffff",
+  },
+  submitButton: {
+    backgroundColor: "gray",
+    padding: 100,
+  },
+});
 
-    // function handleSubmit(credentials, setSubmitting) {
-    //     handleMessage(null);
-    //     const url = 'http://192.168.1.106:45455/api/cebimdekibahcivan/girisyap'
-
-    //     axios
-    //         .post(url, credentials)
-    //         .then((response) => {
-    //             const result = response.data.content;
-    //             const {message, status, data} = result;
-
-    //             if (status != 'SUCCESS') {
-    //                 handleMessage(message, status);
-    //             }else {
-    //                 navigation.navigate('SignPage', {...data[0]});
-    //             }
-    //             setSubmitting(false);
-    //         })
-    //         .catch(error => {
-    //         console.log(error.JSON());
-    //         setSubmitting(false);
-    //         handleMessage("Bir hata oluştu.Bilgilerinizi kontrol edip tekrardan deneyiniz");
-    //     })
-    // }
-    
-    // const handleMessage = (message, type = 'FAILED') => {
-    //     setMessage(message);
-    //     setMessageType(type);
-    // }
-    
-
-    return (
-        <SafeAreaView style={styles.container}>
-            
-            <View style={styles.logo_container}>
-                
-                    <Image style={styles.logo} source={require('../../../assets/login.png')} /> 
-                
-            </View>
-            
-                <Formik 
-                initialValues={initialFormValues} 
-                onSubmit={onSubmitFormHandler}>
-                {({values, handleChange, handleSubmit, handleBlur}) =>(
-                    <>
-                        <Input
-                            value={values.KullaniciAdi}
-                            onType={handleChange('KullaniciAdi')}
-                            placeholder="Kullanıcı adınızı giriniz.."
-                        />
-                        <Input 
-                            value={values.Sifre}
-                            onType={handleChange('Sifre')}
-                            onBlur={handleBlur('Sİfre')}
-                            placeholder="şifrenizi giriniz.."
-                        />
-                       
-                        <Button text="giriş yap" onPress={handleSubmit} loading= {loading} />
-                        <Button text="kayıt ol" theme="secondary" onPress={handleSignUp}/>
-                    </>
-                )}
-            </Formik>
-            
-             
-           
-        </SafeAreaView>
-    );
-};
-
-export default Login;
