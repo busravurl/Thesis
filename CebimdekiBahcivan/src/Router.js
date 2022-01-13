@@ -65,8 +65,6 @@ const Tab = createBottomTabNavigator();
           tabBarActiveTintColor: colors.kelly_green,
         })}
 
-        
-
       >
         <Tab.Screen name={HomeTab} component={Home} options={{headerShown: false}}/>
         <Tab.Screen name={SearchTab} component={Search} options={{headerShown: false}}/>

@@ -74,21 +74,16 @@ const Sign = ({navigation}) => {
 
       });
       console.log(response)
-      if(response.state==='OK'){
-              if( kullaniciAdi) {
-                AsyncStorage.setItem('key', kullaniciAdi);
-                setKullaniciAdi('');
-                alert('data saved'); 
-              } else {
-                alert('boş geçmeyin')
-              }
-              console.log(kullaniciAdi);
+        if( kullaniciAdi) {
+          AsyncStorage.setItem('key', kullaniciAdi);
+          setKullaniciAdi('');
+          alert('data saved'); 
+        } else {
+          alert('boş geçmeyin')
+        }
+        console.log(kullaniciAdi);
 
-        alert('Başarılı bir şekilde kayıt olundu! Hoşgeldin '+kullaniciAdi)
-        
-      }else if(response.state==='NOK'){
-          alert(error.message)
-      }
+      alert('Başarılı bir şekilde kayıt olundu! Hoşgeldin '+kullaniciAdi)
     } catch (error) {
       alert(error.message);
        
