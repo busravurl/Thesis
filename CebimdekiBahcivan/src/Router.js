@@ -68,12 +68,12 @@ const Tab = createBottomTabNavigator();
         
 
       >
-        <Tab.Screen name={HomeTab} component={Home} />
-        <Tab.Screen name={SearchTab} component={Search}/>
-        <Tab.Screen name={CameraTab} component={Camera}/>
-        <Tab.Screen name={BlogTab} component={Blog}/>
-        <Tab.Screen name={SuggestTab} component={Suggest}/>
-        <Tab.Screen name={ProfileTab} component={Profile}/>
+        <Tab.Screen name={HomeTab} component={Home} options={{headerShown: false}}/>
+        <Tab.Screen name={SearchTab} component={Search} options={{headerShown: false}}/>
+        <Tab.Screen name={CameraTab} component={Camera} options={{headerShown: false}}/>
+        <Tab.Screen name={BlogTab} component={Blog} options={{headerShown: false}}/>
+        <Tab.Screen name={SuggestTab} component={Suggest} options={{headerShown: false}}/>
+        <Tab.Screen name={ProfileTab} component={Profile} options={{headerShown: false}}/>
       </Tab.Navigator>
       )
   }
@@ -95,11 +95,16 @@ export default () => {
   
   return (
     <NavigationContainer>
-      { user ? (
-      <DrawerTab />
-      ):(
-      <AuthStack />
-      )}
+      <Stack.Navigator>
+        { user ? (
+        <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown: false}}/>
+        ):(
+        <Stack.Screen name="DrawerTab" component={DrawerTab} options={{
+          headerTintColor: colors.green,
+          headerRight: () => (<Ionicons name={'log-out-outline'} size={30} color={'grey'} />),
+          }}/>
+        )}
+      </Stack.Navigator>
   </NavigationContainer>
   );
 };

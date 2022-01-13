@@ -5,14 +5,20 @@ import {
   StyleSheet,
   Text,
   ScrollView,
+  Image,
   View,
-  Button,
   Platform,
-  TextInput,
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import Input from '../../../components/Input/Input';
+import Button from '../../../components/Button/Button';
 
-export default function App() {
+const Login = ({navigation}) => {
+   function handleSignUp() {
+        navigation.navigate('SignPage');
+    };
+
   const [kullaniciAdi, setKullaniciAdi] = useState("");
   const [sifre, setSifre] = useState("");
 
@@ -31,18 +37,22 @@ export default function App() {
     }
 
     try {
-        console.log(kullaniciAdi)
+        
+      //console.log(kullaniciAdi)
       const response = await axios.post('http://192.168.1.106:45457/api/cebimdekiBahcivan/girisYap', {
         kullaniciAdi,
         sifre,
       });
       console.log(response)
-      if(response.state==='OK'){
-alert('Kullanıcı girişi başarılı! Hoşgeldin '+kullaniciAdi)
-
-      }else if(response.state==='NOK'){
-          alert('Kullanıcı adı veya şifre hatalı lütfen tekrar deneyiniz.')
+      if( kullaniciAdi) {
+        AsyncStorage.setItem('key', kullaniciAdi);
+        setKullaniciAdi('');
+        alert('data saved'); 
+      } else {
+        alert('boş geçmeyin')
       }
+      console.log(kullaniciAdi);
+      navigation.navigate('DrawerTab');
     } catch (error) {
       alert(error.message);
        
@@ -50,68 +60,67 @@ alert('Kullanıcı girişi başarılı! Hoşgeldin '+kullaniciAdi)
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View>
+    <ScrollView style={styles.container}>
+      <View style={{flex:1}}>
+        <View style={[styles.logo_container, {justifyContent: 'center', alignItems: 'center', marginTop: 25}]}>
+                <Image style={[styles.logo, {alignItems: 'center'}]} source={require('../../../assets/watering-plants.png')} /> 
+            </View>
         <View style={styles.wrapper}>
           {(
             <Text style={styles.formHeading}></Text>
           )}
         </View>
-        <View style={styles.wrapper}>
-          <TextInput
+        
+          <Input
             placeholder="Kullanıcı Adı"
-            placeholderTextColor="#ffffff"
-            style={styles.input}
             value={kullaniciAdi}
-          
             onChangeText={onChangeKullaniciAdiHandler}
           />
-        </View>
-        <View style={styles.wrapper}>
-          <TextInput
+        
+        
+          <Input
             placeholder="Sifre"
-            placeholderTextColor="#ffffff"
-            style={styles.input}
             value={sifre}
-         
             onChangeText={onChangeSifreHandler}
           />
-        </View>
-        <View>
+       
+        
           <Button
-            title="Giriş Yap"
+            text="Giriş Yap"
             onPress={onSubmitFormHandler}
-            style={styles.submitButton}
+            style= {{backgroundColor: "green"}}
+           
+          />
+          <Button
+            text="Kayıt Ol" 
+            theme="secondary"
+            onPress={handleSignUp}
        
           />
-        </View>
+        
       </View>
     </ScrollView>
   );
 }
 
+export default Login;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#252526",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#ffffff",
+    // alignItems: "center",
+    // justifyContent: "center",
+    
+    
   },
   formHeading: {
-    color: "#ffffff",
+    color: "white",
   },
   wrapper: {
     marginBottom: 10,
   },
-  input: {
-    borderWidth: 2,
-    borderColor: "grey",
-    minWidth: 200,
-    textAlignVertical: "center",
-    paddingLeft: 10,
-    borderRadius: 20,
-    color: "#ffffff",
-  },
+ 
   submitButton: {
     backgroundColor: "gray",
     padding: 100,

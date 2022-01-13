@@ -7,11 +7,11 @@ export default StyleSheet.create({
         backgroundColor: '#fff',
     },
     logo: {
-        width: Dimensions.get('window').width * 0.9,
-        height: Dimensions.get('window').height /5,
+        width: Dimensions.get('window').width * 0.2,
+        height: Dimensions.get('window').height/2,
+        marginRight: 50;
         resizeMode: 'contain',
         alignSelf: 'center',
-        // tintColor: 'white',
     },
     logo_container: {
         flex: 1,
