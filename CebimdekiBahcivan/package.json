@@ -24,6 +24,7 @@
     "react-native": "0.66.1",
     "react-native-camera": "^4.2.1",
     "react-native-flash-message": "^0.2.0",
+    "react-native-modal": "^13.0.0",
     "react-native-mssql": "^0.1.4",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",

@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 function Profile () {
   const scrollView = React.useRef()
+
     return (
       <View style= {{flex: 1, backgroundColor: '#fff'}}>
         <ScrollView 
@@ -16,7 +17,7 @@ function Profile () {
           
           <View style={{margin: 10}}>
               <ImageBackground style={{
-                backgroundColor: '#edf3eb',
+                backgroundColor: '#f7fbf5',
                 marginLeft: 100,
                 marginBottom: 20,
                 //paddingLeft: 10,
@@ -46,7 +47,7 @@ function Profile () {
                 />
               </View>
               
-              <Button text="Bilgilerimi Güncelle"  />
+              <Button text="Bilgilerimi Güncelle" />
               
               
           </View>

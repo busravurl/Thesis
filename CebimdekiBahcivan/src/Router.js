@@ -97,8 +97,11 @@ export default () => {
         { user ? (
         <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown: false}}/>
         ):(
-        <Stack.Screen name="DrawerTab" component={DrawerTab} options={{
+        <Stack.Screen name="Cebimdeki Bahçıvan" component={DrawerTab} options={{
           headerTintColor: colors.green,
+          headerTitleStyle: {
+            fontFamily:'Montserrat-Light'
+          },
           headerRight: () => (<Ionicons name={'log-out-outline'} size={30} color={'grey'} />),
           }}/>
         )}

@@ -11,7 +11,7 @@ function Blog() {
 
     async function fetchData() {
         const response = await axios.get(
-        'https://192.168.1.106:45457/api/cebimdekiBahcivan/blogYazisiGetir'
+        'https://192.168.1.106:45455/api/cebimdekiBahcivan/blogYazisiGetir'
         );
         //setLoading(false);
         setData(response.data.content);
@@ -52,7 +52,7 @@ function Blog() {
         <View style= {{flex: 1, backgroundColor: '#fff'}}>
             <FlatList
                 data={data}
-                keyExtractor={(item)=> index.id()}
+                //keyExtractor={(item)=> index.id()}
                 contentContainerStyle={{
                     padding: 25,
                     paddingTop: StatusBar.currentHeight || 42
