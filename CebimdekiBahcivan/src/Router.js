@@ -12,6 +12,8 @@ import Camera from './pages/Camera';
 import Blog from './pages/Blog';
 import Suggest from './pages/Suggest';
 import Profile from './pages/Profile';
+import ProfileEdit from './pages/ProfileEdit';
+import Kaydedilenler from './pages/Kaydedilenler';
 
 import colors from './styles/colors';
 
@@ -35,6 +37,17 @@ const Tab = createBottomTabNavigator();
               <Stack.Screen name="SignPage" component={Sign} /> 
           </Stack.Navigator>
       );
+  };
+
+  const ProfileStack = () => {
+    return (
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+              
+              <Stack.Screen name="ProfilePage" component={Profile} />
+              <Stack.Screen name="ProfileEditPage" component={ProfileEdit} /> 
+              <Stack.Screen name="KaydedilenlerPage" component={Kaydedilenler} /> 
+          </Stack.Navigator>
+    );
   };
 
   const DrawerTab = () => {
@@ -71,7 +84,7 @@ const Tab = createBottomTabNavigator();
         <Tab.Screen name={CameraTab} component={Camera} options={{headerShown: false}}/>
         <Tab.Screen name={BlogTab} component={Blog} options={{headerShown: false}}/>
         <Tab.Screen name={SuggestTab} component={Suggest} options={{headerShown: false}}/>
-        <Tab.Screen name={ProfileTab} component={Profile} options={{headerShown: false}}/>
+        <Tab.Screen name={ProfileTab} component={ProfileStack} options={{headerShown: false}}/>
       </Tab.Navigator>
       )
   }

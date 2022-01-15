@@ -1,60 +1,86 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, Text, View, ImageBackground} from 'react-native';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
-
+import {SafeAreaView, Image, TouchableOpacity, Text, View, ImageBackground} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Input from '../../components/Input/Input';
+//import Button from '../../components/Button/Button';
 
-function Profile () {
-  const scrollView = React.useRef()
+
+function Profile ({navigation}) {
+    
 
     return (
-      <View style= {{flex: 1, backgroundColor: '#fff'}}>
-        <ScrollView 
-          ref={scrollView}
-          showsVerticalScrollIndicator= {false}
-          contentContainerStyle= {{flexGrow: 1}}>
-          
-          <View style={{margin: 10}}>
-              <ImageBackground style={{
-                backgroundColor: '#f7fbf5',
-                marginLeft: 100,
-                marginBottom: 20,
-                //paddingLeft: 10,
-                height: 130,
-                width: 130,
-                borderRadius: 100,
-                alignItems: 'center'
-                 }}>
-                <Ionicons name={'person-outline'} color="green" size={70} style={{margin:20 , height: 70,
-                width: 70}}/>
-              </ImageBackground>
-              <View>
-                <Input
-                    placeholder="e-postanızı giriniz.."
-                />
-                <Input 
-                    placeholder="şifrenizi giriniz.."
-                />
-                <Input 
-                    placeholder="e-posta adresinizi giriniz.."
-                />
-                <Input 
-                    placeholder="Telefon numaranızı giriniz.."
-                />
-                <Input 
-                    placeholder="Yaşadığınız ilin plaka kodunu giriniz.."
-                />
-              </View>
-              
-              <Button text="Bilgilerimi Güncelle" />
-              
-              
-          </View>
-         </ScrollView>
+      <SafeAreaView style= {{flex: 1, backgroundColor: '#fff'}}>
 
-      </View>
-  );
+          <View >
+              <View>
+                 <Image style={ {margin: 30, marginLeft: 111}} source={require('../../assets/plantprofile.png')} /> 
+
+              </View>
+
+              <TouchableOpacity
+                style={{
+                  padding: 8,
+                  margin: 10,
+                  borderRadius: 20,
+                  borderColor: 'gray',
+                  marginLeft: 30
+                  //alignItems: 'center',
+                  
+                }}
+                onPress={() => navigation.navigate('ProfileEditPage')}>
+                
+                  <View style={{flexDirection: 'row', marginBottom: 10}}>
+                    <Ionicons name={'person-outline'} color="gray" size={22}/>
+                    <Text style={{paddingLeft: 15, fontSize: 18}}>Profil Bilgilerim</Text>
+                  </View>
+                  
+                
+                
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  padding: 8,
+                  margin: 10,
+                  borderRadius: 20,
+                  borderColor: 'gray',
+                  marginLeft: 30
+                  
+                }}
+                onPress={() => navigation.navigate('KaydedilenlerPage')}>
+                
+                  <View style={{flexDirection: 'row', marginBottom: 10}}>
+                    <Ionicons name={'bookmarks-outline'} color="gray" size={22}/>
+                    <Text style={{paddingLeft: 15, fontSize: 18}}>Kaydedilenler</Text>
+                  </View>
+                  
+                
+                
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  padding: 8,
+                  margin: 10,
+                  borderRadius: 20,
+                  borderColor: 'gray',
+                  marginLeft: 30
+                  
+                }}
+               // onPress={}
+               >
+                
+                  <View style={{flexDirection: 'row', marginBottom: 10}}>
+                    <Ionicons name={'log-out-outline'} color="gray" size={22} />
+                    <Text style={{paddingLeft: 18, fontSize: 18}}>Çıkış Yap</Text>
+                  </View>
+                  
+                
+                
+              </TouchableOpacity>
+          </View>
+
+
+      </SafeAreaView>
+   );
 } 
 
 export default Profile;

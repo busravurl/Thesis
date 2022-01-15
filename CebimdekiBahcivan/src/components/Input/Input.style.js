@@ -4,8 +4,9 @@ export default StyleSheet.create({
     container: {
         padding: 10,
         margin: 10,
-        backgroundColor: '#f2f2f2',
-        borderRadius: 5,
+        backgroundColor: '#ffffff' ,
+        borderRadius: 12, 
+        elevation: 2,
         flexDirection: 'row',
     },
     input: {

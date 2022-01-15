@@ -11,11 +11,11 @@ function Suggest() {
 
   async function fetchData() {
     const response = await axios.get(
-      'https://192.168.1.106:45455/api/cebimdekiBahcivan/BitkiOnerileri'
+      'http://192.168.1.106:45455/api/cebimdekiBahcivan/BitkiOnerileri'
     );
     setData(response.data.content);
   }
-  const render = ({item, index}) =>
+  const render = ({item}) =>
     {
       return (
            
@@ -52,6 +52,7 @@ function Suggest() {
       <View style={styles.flatView}>
         <FlatList 
           data={data} 
+          keyExtractor={(item)=> item.id}
           renderItem={render}/>
         
       </View>
