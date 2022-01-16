@@ -98,7 +98,6 @@ export default () => {
   React.useEffect(() => {
     setTimeout(() => {
       setIsLoading(!isLoading);
-      //setUser({});
     }, 500);
 
     
@@ -107,17 +106,17 @@ export default () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        { user ? (
+        
         <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown: false}}/>
-        ):(
+       
         <Stack.Screen name="Cebimdeki Bahçıvan" component={DrawerTab} options={{
           headerTintColor: colors.green,
           headerTitleStyle: {
             fontFamily:'Montserrat-Light'
           },
-          headerRight: () => (<Ionicons name={'log-out-outline'} size={30} color={'grey'} />),
+          //headerRight: () => (<Ionicons name={'log-out-outline'} size={30} color={'grey'} />),
           }}/>
-        )}
+       
       </Stack.Navigator>
   </NavigationContainer>
   );

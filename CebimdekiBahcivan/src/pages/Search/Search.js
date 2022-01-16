@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, Text, FlatList, View, Dimensions, StatusBar} from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const { width, height } = Dimensions.get('screen');
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './Search.style';
@@ -12,6 +13,33 @@ function Search() {
     const [filteredData, setfilteredData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [search, setsearch] = useState("");
+    const [BitkiAd, setBitkiAd] = useState("");
+
+
+    const KaydedilenlereGonder = async (event) => {
+        try {
+        const response = await axios.post('http://192.168.1.106:45455/api/cebimdekiBahcivan/BitkiyiFavorilereEkleme', {
+            BitkiAd
+        });
+        console.log(response)
+            if( BitkiAd) {
+            AsyncStorage.setItem('key', BitkiAd);
+            setBitkiAd(BitkiAd);
+            alert('data saved'); 
+            } else {
+            alert('boş geçmeyin')
+            }
+            console.log(BitkiAd);
+
+        alert(BitkiAd + 'kaydedilenler sayfanızda!')
+        } catch (error) {
+        alert(error.message);
+        
+        }
+    };
+
+
+
 
     useEffect(() => {
         fetchData();
@@ -59,7 +87,13 @@ function Search() {
                                 <Text style ={{fontSize: 22, marginLeft: 10, color:"#18A558"}}>{item.BitkiAd.toUpperCase()}</Text>
                                 <Text style ={{fontSize: 14, marginLeft: 10}}>{item.Ad}</Text>
                             </View>
-                            <Ionicons name={'bookmark-outline'} color="#07381d" size={30} />
+                            <View>
+                                <Ionicons 
+                                name={'bookmark-outline'} 
+                                color= "#07381d" 
+                                size={30} 
+                                onPress={(BitkiAd) => KaydedilenlereGonder(BitkiAd)}/>
+                            </View>
                         </View>
                          <View>
                             <Text style ={{fontSize: 14, marginLeft: 10}}>{item.BitkiAciklama}</Text>

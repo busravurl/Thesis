@@ -14,9 +14,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/Button/Button';
 
-const Login = ({navigation}) => {
+const Login = (props) => {
    function handleSignUp() {
-        navigation.navigate('SignPage');
+        props.navigation.navigate('SignPage');
     };
 
   const [kullaniciAdi, setKullaniciAdi] = useState("");
@@ -39,20 +39,17 @@ const Login = ({navigation}) => {
     try {
         
       //console.log(kullaniciAdi)
-      const response = await axios.post('http://192.168.1.106:45457/api/cebimdekiBahcivan/girisYap', {
+      const response = await axios.post('http://192.168.1.106:45455/api/cebimdekiBahcivan/girisYap', {
         kullaniciAdi,
         sifre,
       });
       console.log(response)
-      if( kullaniciAdi) {
-        AsyncStorage.setItem('key', kullaniciAdi);
-        setKullaniciAdi('');
-        alert('data saved'); 
-      } else {
-        alert('boş geçmeyin')
-      }
+      AsyncStorage.setItem('key', kullaniciAdi);
+      setKullaniciAdi('');
+      props.navigation.navigate('Cebimdeki Bahçıvan', kullaniciAdi);
+      
       console.log(kullaniciAdi);
-      navigation.navigate('DrawerTab');
+      
     } catch (error) {
       alert(error.message);
        

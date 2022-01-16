@@ -3,7 +3,7 @@ import {SafeAreaView, Image, TouchableOpacity, Text, View, ImageBackground} from
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Input from '../../components/Input/Input';
 //import Button from '../../components/Button/Button';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Profile ({navigation}) {
     
