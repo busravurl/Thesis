@@ -13,7 +13,8 @@ import Blog from './pages/Blog';
 import Suggest from './pages/Suggest';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
-import Kaydedilenler from './pages/Kaydedilenler';
+import KaydedilenBitkiler from './pages/KaydedilenBitkiler';
+import KaydedilenBlogYazilari from './pages/KaydedilenBlogYazilari';
 
 import colors from './styles/colors';
 
@@ -38,6 +39,7 @@ const Tab = createBottomTabNavigator();
           </Stack.Navigator>
       );
   };
+ 
 
   const ProfileStack = () => {
     return (
@@ -45,7 +47,8 @@ const Tab = createBottomTabNavigator();
               
               <Stack.Screen name="ProfilePage" component={Profile} />
               <Stack.Screen name="ProfileEditPage" component={ProfileEdit} /> 
-              <Stack.Screen name="KaydedilenlerPage" component={Kaydedilenler} /> 
+              <Stack.Screen name="KaydedilenBitkilerPage" component={KaydedilenBitkiler} /> 
+              <Stack.Screen name="KaydedilenBlogYazilariPage" component={KaydedilenBlogYazilari} />
           </Stack.Navigator>
     );
   };

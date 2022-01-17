@@ -46,11 +46,30 @@ function Profile ({navigation}) {
                   marginLeft: 30
                   
                 }}
-                onPress={() => navigation.navigate('KaydedilenlerPage')}>
+                onPress={() => navigation.navigate('KaydedilenBitkilerPage')}>
+                
+                  <View style={{flexDirection: 'row', marginBottom: 10}}>
+                    <Ionicons name={'bookmark-outline'} color="gray" size={22}/>
+                    <Text style={{paddingLeft: 15, fontSize: 18}}>Kaydedilen Bitkiler</Text>
+                  </View>
+                  
+                
+                
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  padding: 8,
+                  margin: 10,
+                  borderRadius: 20,
+                  borderColor: 'gray',
+                  marginLeft: 30
+                  
+                }}
+                onPress={() => navigation.navigate('KaydedilenBlogYazilariPage')}>
                 
                   <View style={{flexDirection: 'row', marginBottom: 10}}>
                     <Ionicons name={'bookmarks-outline'} color="gray" size={22}/>
-                    <Text style={{paddingLeft: 15, fontSize: 18}}>Kaydedilenler</Text>
+                    <Text style={{paddingLeft: 15, fontSize: 18}}>Kaydedilen Blog Yazıları</Text>
                   </View>
                   
                 
