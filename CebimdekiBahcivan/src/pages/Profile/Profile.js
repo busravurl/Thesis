@@ -53,7 +53,7 @@ function Profile(props) {
             marginLeft: 30,
             //alignItems: 'center',
           }}
-          onPress={() => navigation.navigate('ProfileEditPage')}>
+          onPress={() => props.navigation.navigate('ProfileEditPage')}>
           <View style={{flexDirection: 'row', marginBottom: 10}}>
             <Ionicons name={'person-outline'} color="gray" size={22} />
             <Text style={{paddingLeft: 15, fontSize: 18}}>
@@ -61,6 +61,7 @@ function Profile(props) {
             </Text>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={{
             padding: 8,
@@ -69,21 +70,7 @@ function Profile(props) {
             borderColor: 'gray',
             marginLeft: 30,
           }}
-          onPress={() => navigation.navigate('KaydedilenlerPage')}>
-          <View style={{flexDirection: 'row', marginBottom: 10}}>
-            <Ionicons name={'bookmarks-outline'} color="gray" size={22} />
-            <Text style={{paddingLeft: 15, fontSize: 18}}>Kaydedilenler</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            padding: 8,
-            margin: 10,
-            borderRadius: 20,
-            borderColor: 'gray',
-            marginLeft: 30,
-          }}
-          onPress={() => navigation.navigate('KaydedilenBitkilerPage')}>
+          onPress={() => props.navigation.navigate('KaydedilenBitkilerPage')}>
           <View style={{flexDirection: 'row', marginBottom: 10}}>
             <Ionicons name={'bookmarks-outline'} color="gray" size={22} />
             <Text style={{paddingLeft: 15, fontSize: 18}}>
@@ -99,7 +86,9 @@ function Profile(props) {
             borderColor: 'gray',
             marginLeft: 30,
           }}
-          onPress={() => navigation.navigate('KaydedilenBlogYazilariPage')}>
+          onPress={() =>
+            props.navigation.navigate('KaydedilenBlogYazilariPage')
+          }>
           <View style={{flexDirection: 'row', marginBottom: 10}}>
             <Ionicons name={'bookmarks-outline'} color="gray" size={22} />
             <Text style={{paddingLeft: 15, fontSize: 18}}>
