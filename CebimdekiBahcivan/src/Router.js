@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -14,6 +14,8 @@ import Suggest from './pages/Suggest';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Kaydedilenler from './pages/Kaydedilenler';
+import KaydedilenBitkiler from './pages/KaydedilenBitkiler';
+import KaydedilenBlogYazilari from './pages/KaydedilenBlogYazilari';
 
 import colors from './styles/colors';
 
@@ -24,72 +26,96 @@ const BlogTab = 'Blog';
 const SuggestTab = 'Suggest';
 const ProfileTab = 'Profile';
 
-
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const AuthStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="LoginPage" component={Login} />
+      <Stack.Screen name="SignPage" component={Sign} />
+    </Stack.Navigator>
+  );
+};
 
-  const AuthStack = () => {
-        return(
-          <Stack.Navigator screenOptions={{headerShown: false}}>
-              
-              <Stack.Screen name="LoginPage" component={Login} />
-              <Stack.Screen name="SignPage" component={Sign} /> 
-          </Stack.Navigator>
-      );
-  };
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="ProfilePage" component={Profile} />
+      <Stack.Screen name="ProfileEditPage" component={ProfileEdit} />
+      <Stack.Screen name="KaydedilenlerPage" component={Kaydedilenler} />
+      <Stack.Screen
+        name="KaydedilenBitkilerPage"
+        component={KaydedilenBitkiler}
+      />
+      <Stack.Screen
+        name="KaydedilenBlogYazilariPage"
+        component={KaydedilenBlogYazilari}
+      />
+    </Stack.Navigator>
+  );
+};
 
-  const ProfileStack = () => {
-    return (
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-              
-              <Stack.Screen name="ProfilePage" component={Profile} />
-              <Stack.Screen name="ProfileEditPage" component={ProfileEdit} /> 
-              <Stack.Screen name="KaydedilenlerPage" component={Kaydedilenler} /> 
-          </Stack.Navigator>
-    );
-  };
+const DrawerTab = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName={HomeTab}
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName;
+          let rn = route.name;
 
-  const DrawerTab = () => {
-      return(
-        <Tab.Navigator  
-        initialRouteName = {HomeTab}
-        screenOptions= {({route}) => ({
-          tabBarIcon: ({ focused, color, size}) =>  {
-            let iconName;
-            let rn = route.name;
+          if (rn === HomeTab) {
+            iconName = focused ? 'home' : 'home-outline';
+          } else if (rn === SearchTab) {
+            iconName = focused ? 'search' : 'search-outline';
+          } else if (rn === CameraTab) {
+            iconName = focused ? 'camera' : 'camera-outline';
+          } else if (rn === BlogTab) {
+            iconName = focused ? 'newspaper' : 'newspaper-outline';
+          } else if (rn === SuggestTab) {
+            iconName = focused ? 'bulb' : 'bulb-outline';
+          } else if (rn === ProfileTab) {
+            iconName = focused ? 'person' : 'person-outline';
+          }
 
-            if ( rn === HomeTab) {
-              iconName = focused ? 'home' : 'home-outline';
-            }else if ( rn === SearchTab) {
-              iconName = focused ? 'search' : 'search-outline';
-            }else if ( rn === CameraTab) {
-              iconName = focused ? 'camera' : 'camera-outline';
-            }else if ( rn === BlogTab) {
-              iconName = focused ? 'newspaper' : 'newspaper-outline';
-            }else if ( rn === SuggestTab) {
-              iconName = focused ? 'bulb' : 'bulb-outline';
-            }else if ( rn === ProfileTab) {
-              iconName = focused ? 'person' : 'person-outline';
-            }
-
-            return <Ionicons name={iconName} size={size} color={color}/>
-          },
-          tabBarActiveTintColor: colors.kelly_green,
-        })}
-
-      >
-        <Tab.Screen name={HomeTab} component={Home} options={{headerShown: false}}/>
-        <Tab.Screen name={SearchTab} component={Search} options={{headerShown: false}}/>
-        <Tab.Screen name={CameraTab} component={Camera} options={{headerShown: false}}/>
-        <Tab.Screen name={BlogTab} component={Blog} options={{headerShown: false}}/>
-        <Tab.Screen name={SuggestTab} component={Suggest} options={{headerShown: false}}/>
-        <Tab.Screen name={ProfileTab} component={ProfileStack} options={{headerShown: false}}/>
-      </Tab.Navigator>
-      )
-  }
-  
-
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: colors.kelly_green,
+      })}>
+      <Tab.Screen
+        name={HomeTab}
+        component={Home}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name={SearchTab}
+        component={Search}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name={CameraTab}
+        component={Camera}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name={BlogTab}
+        component={Blog}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name={SuggestTab}
+        component={Suggest}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name={ProfileTab}
+        component={ProfileStack}
+        options={{headerShown: false}}
+      />
+    </Tab.Navigator>
+  );
+};
 
 export default () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -99,25 +125,29 @@ export default () => {
     setTimeout(() => {
       setIsLoading(!isLoading);
     }, 500);
-
-    
   }, []);
-  
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        
-        <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown: false}}/>
-       
-        <Stack.Screen name="Cebimdeki Bahçıvan" component={DrawerTab} options={{
-          headerTintColor: colors.green,
-          headerTitleStyle: {
-            fontFamily:'Montserrat-Light'
-          },
-          //headerRight: () => (<Ionicons name={'log-out-outline'} size={30} color={'grey'} />),
-          }}/>
-       
+        <Stack.Screen
+          name="AuthStack"
+          component={AuthStack}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="Cebimdeki Bahçıvan"
+          component={DrawerTab}
+          options={{
+            headerTintColor: colors.green,
+            headerTitleStyle: {
+              fontFamily: 'Montserrat-Light',
+            },
+            //headerRight: () => (<Ionicons name={'log-out-outline'} size={30} color={'grey'} />),
+          }}
+        />
       </Stack.Navigator>
-  </NavigationContainer>
+    </NavigationContainer>
   );
 };

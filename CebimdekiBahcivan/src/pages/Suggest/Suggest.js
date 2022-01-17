@@ -1,63 +1,79 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, FlatList,Text, Image, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList, StatusBar} from 'react-native';
 import axios from 'axios';
-import CardList from '../../components/CardList/CardList';
 
 import styles from './Suggest.style';
 
 function Suggest() {
   const [data, setData] = useState([]);
-
+  let KullaniciAdi = '';
 
   async function fetchData() {
-    const response = await axios.get(
-      'http://192.168.1.106:45455/api/cebimdekiBahcivan/BitkiOnerileri'
-    );
-    setData(response.data.content);
+    try {
+      const response1 = await axios.get(
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+      );
+      KullaniciAdi = response1.data.content[0].KullaniciAdi;
+      console.log(KullaniciAdi);
+      const response = await axios.get(
+        `http://192.168.1.45:45455/api/cebimdekiBahcivan/BitkiOnerileri?KullaniciAdi=${KullaniciAdi}`,
+      );
+      setData(response.data.content);
+      console.log(response.data.content);
+    } catch (error) {
+      alert(error.message);
+    }
   }
-  const render = ({item}) =>
-    {
-      return (
-           
-          <View style={{flexDirection: 'row', padding:25,marginBottom: 20 ,backgroundColor: 'rgba(225,225,225,0.18)' ,borderRadius: 12,
-                        shadowColor: "#000", 
-                        shadowOffset: {
-                            width:0,
-                            height:10
-                        },
-                        shadowOpacity: .4,
-                        shadowRadius: 10
-                    }}>
-                         
 
-                         <View>
-                             <Text style ={{fontSize: 22, marginLeft: 10, color:"#18A558"}}>{item.BitkiAd}</Text>
-                         </View>
-                        
-                        
-                    </View>
-  
-        )
-    };
-    
-    useEffect(() => {
-      fetchData();
-    }, []);
- 
+  const _render = ({item}) => {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          padding: 15,
+          marginBottom: 20,
+          backgroundColor: '#ffffff',
+          borderRadius: 12,
+          elevation: 1,
+        }}>
+        <View>
+          <Text style={{fontSize: 22, marginLeft: 10, color: '#18A558'}}>
+            {item.BitkiAd}
+          </Text>
+          <Text style={{fontSize: 14, marginLeft: 10}}>{item.Ad}</Text>
+
+          <Text style={{fontSize: 14, marginLeft: 10}}>
+            {item.BitkiAciklama}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      
-          
-      <View style={styles.flatView}>
-        <FlatList 
-          data={data} 
-          keyExtractor={(item)=> item.id}
-          renderItem={render}/>
-        
+    <>
+      <View>
+        <Text style={{fontSize: 22, marginLeft: 10, color: '#18A558'}}>
+          Yaşadığım Yerde Ne Yetişir?
+        </Text>
       </View>
-    </SafeAreaView>
+
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
+        <FlatList
+          data={data}
+          keyExtractor={item => item.Id}
+          contentContainerStyle={{
+            padding: 25,
+            paddingTop: StatusBar.currentHeight || 42,
+          }}
+          renderItem={_render}
+        />
+      </View>
+    </>
   );
-};
+}
 
 export default Suggest;
