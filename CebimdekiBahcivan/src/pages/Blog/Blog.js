@@ -17,9 +17,12 @@ function Blog() {
     const response = await axios.get(
       'http://192.168.1.45:45455/api/cebimdekiBahcivan/blogYazisiGetir',
     );
-    //setLoading(false);
-    setData(response.data.content);
-    console.log('res' + response.data.content);
+
+    if (response.data.state === 'NOK') {
+      alert(response.data.content);
+    } else {
+      setData(response.data.content);
+    }
   }
   const _render = ({item}) => {
     return (

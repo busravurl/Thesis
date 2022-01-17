@@ -38,17 +38,16 @@ const Login = props => {
       return;
     }
     try {
-      const response = await axios
-        .post('http://192.168.1.45:45455/api/cebimdekiBahcivan/girisYap', {
+      const response = await axios.post(
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/girisYap',
+        {
           kullaniciAdi,
           sifre,
-        })
-        .then(response => {
-          alert('Giriş başarılı');
-        })
-        .catch(error => {
-          alert(error.message);
-        });
+        },
+      );
+      if (response.data.state === 'NOK') {
+        alert(response.data.content);
+      }
       const response2 = await axios.post(
         'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciEkle',
         {
@@ -56,7 +55,11 @@ const Login = props => {
         },
       );
       setKullaniciAdi('');
-      props.navigation.navigate('Cebimdeki Bahçıvan', kullaniciAdi);
+      setSifre('');
+      if (response.data.state === 'OK') {
+        alert(response.data.content);
+        props.navigation.navigate('Cebimdeki Bahçıvan', kullaniciAdi);
+      }
     } catch (error) {
       alert(error.message);
     }
@@ -80,13 +83,13 @@ const Login = props => {
         </View>
 
         <Input
-          placeholder="Kullanıcı Adı"
+          placeholder="Kullanıcı Adınız"
           value={kullaniciAdi}
           onChangeText={onChangeKullaniciAdiHandler}
         />
 
         <PwInput
-          placeholder="Sifre"
+          placeholder="Sifreniz"
           value={sifre}
           onChangeText={onChangeSifreHandler}
         />

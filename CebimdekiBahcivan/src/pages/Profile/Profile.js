@@ -27,8 +27,12 @@ function Profile(props) {
           KullaniciAdi,
         },
       );
-      props.navigation.navigate('LoginPage');
-      alert('Başarılı bir şekilde çıkış yapıldı.');
+      if (response.data.state === 'NOK') {
+        alert(response.data.content);
+      } else {
+        props.navigation.navigate('LoginPage');
+        alert(response.data.content);
+      }
     } catch (error) {
       alert(error.message);
     }

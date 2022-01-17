@@ -59,7 +59,7 @@ const Sign = ({navigation}) => {
     try {
       //console.log(kullaniciAdi)
       const response = await axios.post(
-        'http://192.168.1.45:45457/api/cebimdekiBahcivan/kayitOl',
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/kayitOl',
         {
           ad,
           soyad,
@@ -70,17 +70,11 @@ const Sign = ({navigation}) => {
           ilId,
         },
       );
-      console.log(response);
-      if (kullaniciAdi) {
-        AsyncStorage.setItem('key', kullaniciAdi);
-        setKullaniciAdi('');
-        alert('data saved');
+      if (response.data.state === 'NOK') {
+        alert(response.data.content);
       } else {
-        alert('boş geçmeyin');
+        alert(response.data.content);
       }
-      console.log(kullaniciAdi);
-
-      alert('Başarılı bir şekilde kayıt olundu! Hoşgeldin ' + kullaniciAdi);
     } catch (error) {
       alert(error.message);
     }
@@ -95,7 +89,7 @@ const Sign = ({navigation}) => {
             {justifyContent: 'center', alignItems: 'center', marginTop: 25},
           ]}>
           <Image
-            style={styles.logo}
+            style={[styles.logo, {alignItems: 'center'}]}
             source={require('../../../assets/plant.png')}
           />
         </View>
@@ -104,49 +98,49 @@ const Sign = ({navigation}) => {
         </View>
 
         <Input
-          placeholder="Adınızı giriniz"
+          placeholder="Adınız"
           value={ad}
           onChangeText={onChangeAdHandler}
         />
 
         <Input
-          placeholder="Soyadınızı Giriniz"
+          placeholder="Soyadınız"
           value={soyad}
           onChangeText={onChangeSoyadHandler}
         />
 
         <Input
-          placeholder="Kullanıcı Adı giriniz"
+          placeholder="Kullanıcı Adınız"
           value={kullaniciAdi}
           onChangeText={onChangeKullaniciAdiHandler}
         />
 
         <PwInput
-          placeholder="Sifre giriniz"
+          placeholder="Sifreniz"
           value={sifre}
           onChangeText={onChangeSifreHandler}
         />
 
         <Input
-          placeholder="Telefon numarası giriniz"
+          placeholder="Telefon Numaranız"
           value={telefon}
           onChangeText={onChangeTelefonHandler}
         />
 
         <Input
-          placeholder="Eposta adresinizi giriniz"
+          placeholder="Eposta Adresiniz"
           value={eposta}
           onChangeText={onChangeEpostaHandler}
         />
 
         <Input
-          placeholder="Yaşadığınız il"
+          placeholder="Yaşadığınız İlin Plaka Koddu"
           value={ilId}
           onChangeText={onChangeIlIdHandler}
         />
 
         <Button text="Kayıt Ol" onPress={onSubmitFormHandler} />
-        <Button text="Giriş ap" theme="secondary" onPress={handleLogin} />
+        <Button text="Giriş Yap" theme="secondary" onPress={handleLogin} />
       </View>
     </ScrollView>
   );

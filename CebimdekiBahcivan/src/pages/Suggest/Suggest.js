@@ -18,8 +18,11 @@ function Suggest() {
       const response = await axios.get(
         `http://192.168.1.45:45455/api/cebimdekiBahcivan/BitkiOnerileri?KullaniciAdi=${KullaniciAdi}`,
       );
-      setData(response.data.content);
-      console.log(response.data.content);
+      if (response.data.state === 'NOK') {
+        alert(response.data.content);
+      } else {
+        setData(response.data.content);
+      }
     } catch (error) {
       alert(error.message);
     }

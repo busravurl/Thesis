@@ -17,12 +17,12 @@ import Input from '../../components/Input/Input';
 
 function Search(props) {
   const [filteredData, setfilteredData] = useState([]);
-  const [masterData, setmasterData] = useState([]);
+  const [data, setmasterData] = useState([]);
   const [search, setsearch] = useState('');
   const [BitkiAd, setBitkiAd] = useState('');
   let KullaniciAdi = '';
 
-  const KaydedilenlereGonder = async event => {
+  async function KaydedilenlereGonder(item) {
     try {
       const response1 = await axios.get(
         'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
@@ -31,24 +31,20 @@ function Search(props) {
       const response = await axios.post(
         'http://192.168.1.45:45455/api/cebimdekiBahcivan/BitkiyiFavorilereEkleme',
         {
-          BitkiAd: BitkiAd,
+          BitkiAd: item.BitkiAd,
           KullaniciAdi,
         },
       );
 
-      if (BitkiAd) {
-        AsyncStorage.setItem('key', BitkiAd);
-        setBitkiAd(BitkiAd);
-        alert('data saved');
+      if (response.data.state === 'NOK') {
+        alert(response.data.content);
       } else {
-        alert('boş geçmeyin');
+        setMasterData(response.data.content);
       }
-
-      alert(BitkiAd + 'kaydedilenler sayfanızda!');
     } catch (error) {
       alert(error.message);
     }
-  };
+  }
 
   useEffect(() => {
     fetchData();
@@ -63,14 +59,17 @@ function Search(props) {
     const response = await axios.get(
       'http://192.168.1.45:45455/api/cebimdekiBahcivan/Bitkilistele',
     );
-    //setLoading(false);
-    setfilteredData(response.data.content);
-    setmasterData(response.data.content);
+    if (response.data.state === 'NOK') {
+      alert(response.data.content);
+    } else {
+      setfilteredData(response.data.content);
+      setmasterData(response.data.content);
+    }
   }
 
   const searchFilter = text => {
     if (text) {
-      const newData = masterData.filter(item => {
+      const newData = data.filter(item => {
         const itemData = item.BitkiAd
           ? item.BitkiAd.toUpperCase()
           : ''.toUpperCase();
@@ -106,8 +105,7 @@ function Search(props) {
               name={'bookmark-outline'}
               color="#07381d"
               size={30}
-              onPress={KaydedilenlereGonder}
-            />
+              onPress={KaydedilenlereGonder(item.Id)}></Ionicons>
           </View>
         </View>
         <View>
