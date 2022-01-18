@@ -128,21 +128,17 @@ export default () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="AuthStack"
           component={AuthStack}
           options={{headerShown: false}}
-        />
+        /> */}
 
         <Stack.Screen
           name="Cebimdeki Bahçıvan"
           component={DrawerTab}
           options={{
-            headerTintColor: colors.green,
-            headerTitleStyle: {
-              fontFamily: 'Montserrat-Light',
-            },
-            //headerRight: () => (<Ionicons name={'log-out-outline'} size={30} color={'grey'} />),
+            headerShown: false
           }}
         />
       </Stack.Navigator>

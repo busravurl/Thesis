@@ -17,6 +17,7 @@ import {
 import {cropPicture} from '../../helpers/image-helper';
 
 import {RNCamera as Camera} from 'react-native-camera';
+import Header from '../../components/Header/Header';
 
 const RESULT_MAPPING = ['Triangle', 'Circle', 'Square'];
 
@@ -48,6 +49,7 @@ const CameraPage = () => {
 
   return (
     <View style={styles.container}>
+      <Header/>
       <Modal visible={isProcessing} transparent={true} animationType="slide">
         <View style={styles.modal}>
           <View style={styles.modalContent}>

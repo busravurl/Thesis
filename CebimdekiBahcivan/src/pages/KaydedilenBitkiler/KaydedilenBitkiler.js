@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, StatusBar} from 'react-native';
 import axios from 'axios';
+import Header from '../../components/Header/Header';
 
 function KaydedilenBitkiler() {
   const [data, setData] = useState([]);
@@ -9,12 +10,12 @@ function KaydedilenBitkiler() {
   async function fetchData() {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
       console.log(KullaniciAdi);
       const response = await axios.get(
-        `http://192.168.1.45:45455/api/cebimdekiBahcivan/FavorilereEklenenBitkiyiGoruntuleme?KullaniciAdi=${KullaniciAdi}`,
+        `http://192.168.1.106:45455/api/cebimdekiBahcivan/FavorilereEklenenBitkiyiGoruntuleme?KullaniciAdi=${KullaniciAdi}`,
       );
       if (response.data.state === 'NOK') {
         alert(response.data.content);
@@ -56,6 +57,7 @@ function KaydedilenBitkiler() {
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <Header />
       <FlatList
         data={data}
         keyExtractor={item => item.Id}

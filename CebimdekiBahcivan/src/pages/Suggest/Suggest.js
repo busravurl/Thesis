@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, StatusBar} from 'react-native';
 import axios from 'axios';
+import Header from '../../components/Header/Header';
 
 import styles from './Suggest.style';
 
@@ -11,12 +12,12 @@ function Suggest() {
   async function fetchData() {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
       console.log(KullaniciAdi);
       const response = await axios.get(
-        `http://192.168.1.45:45455/api/cebimdekiBahcivan/BitkiOnerileri?KullaniciAdi=${KullaniciAdi}`,
+        `http://192.168.1.106:45455/api/cebimdekiBahcivan/BitkiOnerileri?KullaniciAdi=${KullaniciAdi}`,
       );
       if (response.data.state === 'NOK') {
         alert(response.data.content);
@@ -58,13 +59,15 @@ function Suggest() {
 
   return (
     <>
-      <View>
-        <Text style={{fontSize: 22, marginLeft: 10, color: '#18A558'}}>
-          Yaşadığım Yerde Ne Yetişir?
-        </Text>
-      </View>
-
+      
       <View style={{flex: 1, backgroundColor: '#fff'}}>
+        <Header />
+        <View>
+          <Text style={{fontSize: 18, marginLeft: 20, color: '#18A558'}}>
+            Yaşadığım Yerde Ne Yetişir?
+          </Text>
+        </View>
+
         <FlatList
           data={data}
           keyExtractor={item => item.Id}

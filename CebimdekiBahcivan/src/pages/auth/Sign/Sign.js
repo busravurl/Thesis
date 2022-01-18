@@ -59,7 +59,7 @@ const Sign = ({navigation}) => {
     try {
       //console.log(kullaniciAdi)
       const response = await axios.post(
-        'http://192.168.1.45:45455/api/cebimdekiBahcivan/kayitOl',
+        'http://192.168.1.106:45455/api/cebimdekiBahcivan/kayitOl',
         {
           ad,
           soyad,

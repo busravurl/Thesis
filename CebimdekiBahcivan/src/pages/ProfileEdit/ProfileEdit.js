@@ -3,6 +3,7 @@ import {SafeAreaView, ScrollView, Text, View, Image} from 'react-native';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import axios from 'axios';
+import Header from '../../components/Header/Header';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -14,12 +15,12 @@ function ProfileEdit() {
   async function fetchData() {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
       console.log(KullaniciAdi);
       const response = await axios.get(
-        `http://192.168.1.45:45455/api/cebimdekiBahcivan/KullaniciBilgileriGetir?KullaniciAdi=${KullaniciAdi}`,
+        `http://192.168.1.106:45455/api/cebimdekiBahcivan/KullaniciBilgileriGetir?KullaniciAdi=${KullaniciAdi}`,
       );
       if (response.data.state === 'NOK') {
         alert(response.data.content);
@@ -59,6 +60,7 @@ function ProfileEdit() {
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <Header />
       <ScrollView
         ref={scrollView}
         showsVerticalScrollIndicator={false}

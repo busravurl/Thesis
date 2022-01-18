@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 import axios from 'axios';
 const {width, height} = Dimensions.get('screen');
+import Header from '../../components/Header/Header';
 
 function Blog() {
   const [data, setData] = useState([]);
 
   async function fetchData() {
     const response = await axios.get(
-      'http://192.168.1.45:45455/api/cebimdekiBahcivan/blogYazisiGetir',
+      'http://192.168.1.106:45455/api/cebimdekiBahcivan/blogYazisiGetir',
     );
 
     if (response.data.state === 'NOK') {
@@ -51,6 +52,7 @@ function Blog() {
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <Header />
       <FlatList
         data={data}
         keyExtractor={item => item.id}
