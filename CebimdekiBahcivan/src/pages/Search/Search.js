@@ -39,6 +39,8 @@ function Search(props) {
 
       if (response.data.state === 'NOK') {
         alert(response.data.content);
+      } else {
+        alert(response.data.content);
       }
     } catch (error) {
       alert(error.message);
@@ -104,7 +106,7 @@ function Search(props) {
               name={'bookmark-outline'}
               color="#07381d"
               size={30}
-              onPress={KaydedilenlereGonder(item.Id)}></Ionicons>
+              onPress={() => KaydedilenlereGonder(item)}></Ionicons>
           </View>
         </View>
         <View>
