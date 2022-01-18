@@ -26,11 +26,11 @@ function ProfileEdit() {
   async function BilgilerimiGuncelle() {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
       const response = await axios.post(
-        'http://192.168.1.45:45455/api/cebimdekiBahcivan/BilgilerimiGuncelle',
+        'http://192.168.1.106:45455/api/cebimdekiBahcivan/BilgilerimiGuncelle',
         {
           KullaniciAdi,
           IlId: PlakaKodu,

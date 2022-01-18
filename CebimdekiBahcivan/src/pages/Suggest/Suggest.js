@@ -12,12 +12,12 @@ function Suggest() {
   async function fetchData() {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
       console.log(KullaniciAdi);
       const response = await axios.get(
-        `http://192.168.1.45:45455/api/cebimdekiBahcivan/BitkiOnerileri?KullaniciAdi=${KullaniciAdi}`,
+        `http://192.168.1.106:45455/api/cebimdekiBahcivan/BitkiOnerileri?KullaniciAdi=${KullaniciAdi}`,
       );
       if (response.data.state === 'NOK') {
         alert(response.data.content);
