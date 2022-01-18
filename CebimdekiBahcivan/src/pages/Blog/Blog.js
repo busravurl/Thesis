@@ -16,7 +16,7 @@ function Blog() {
 
   async function fetchData() {
     const response = await axios.get(
-      'http://192.168.1.106:45455/api/cebimdekiBahcivan/blogYazisiGetir',
+      'http://192.168.1.45:45455/api/cebimdekiBahcivan/blogYazisiGetir',
     );
 
     if (response.data.state === 'NOK') {

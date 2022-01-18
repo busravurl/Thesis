@@ -12,20 +12,36 @@ function ProfileEdit() {
   const [data, setData] = useState([]);
   let KullaniciAdi = '';
 
-  async function fetchData() {
+  const [PlakaKodu, setPlakaKodu] = useState('');
+  const [Sifre, setSifre] = useState('');
+
+  const onChangePlakaKoduHandler = PlakaKodu => {
+    setPlakaKodu(PlakaKodu);
+  };
+
+  const onChangeSifreHandler = Sifre => {
+    setSifre(Sifre);
+  };
+
+  async function BilgilerimiGuncelle() {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
-      console.log(KullaniciAdi);
-      const response = await axios.get(
-        `http://192.168.1.106:45455/api/cebimdekiBahcivan/KullaniciBilgileriGetir?KullaniciAdi=${KullaniciAdi}`,
+      const response = await axios.post(
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/BilgilerimiGuncelle',
+        {
+          KullaniciAdi,
+          IlId: PlakaKodu,
+          Sifre,
+        },
       );
+
       if (response.data.state === 'NOK') {
         alert(response.data.content);
       } else {
-        setData(response.data.content);
+        alert(response.data.content);
       }
     } catch (error) {
       alert(error.message);
@@ -54,9 +70,6 @@ function ProfileEdit() {
       </View>
     );
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
@@ -73,14 +86,19 @@ function ProfileEdit() {
             />
           </View>
           <View>
-            <Input placeholder="e-postanızı giriniz.." />
-            <Input placeholder="şifrenizi giriniz.." />
-            <Input placeholder="e-posta adresinizi giriniz.." />
-            <Input placeholder="Telefon numaranızı giriniz.." />
-            <Input placeholder="Yaşadığınız ilin plaka kodunu giriniz.." />
+            <PwInput
+              placeholder="Sifreniz"
+              value={Sifre}
+              onChangeText={onChangeSifreHandler}
+            />
+            <Input
+              placeholder="Plaka kodunuz"
+              value={PlakaKodu}
+              onChangeText={onChangePlakaKoduHandler}
+            />
           </View>
 
-          <Button text="Bilgilerimi Güncelle" />
+          <Button text="Bilgilerimi Güncelle" onPress={BilgilerimiGuncelle} />
         </View>
       </ScrollView>
     </View>

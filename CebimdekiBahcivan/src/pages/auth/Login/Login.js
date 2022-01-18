@@ -40,18 +40,18 @@ const Login = props => {
     console.log('test');
     try {
       const response = await axios.post(
-        'http://192.168.1.106:45455/api/cebimdekiBahcivan/girisYap',
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/girisYap',
         {
           kullaniciAdi,
           sifre,
         },
       );
-      console.log('ressp'+response);
+      console.log('ressp' + response);
       if (response.data.state === 'NOK') {
         alert(response.data.content);
       }
       const response2 = await axios.post(
-        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciEkle',
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciEkle',
         {
           kullaniciAdi,
         },

@@ -12,7 +12,7 @@ import axios from 'axios';
 import Header from '../../components/Header/Header';
 import ContentInputModal from '../../components/modal/ContentInputModal';
 import FloatingButton from '../../components/FloatingButton';
-const { width, height } = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
 
 function Home() {
   const [data, setData] = useState([]);
@@ -21,11 +21,11 @@ function Home() {
   async function fetchData() {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
       const response = await axios.get(
-        `http://192.168.1.106:45455/api/cebimdekiBahcivan/BenimBahcemBitkiListele?KullaniciAdi=${KullaniciAdi}`,
+        `http://192.168.1.45:45455/api/cebimdekiBahcivan/BenimBahcemBitkiListele?KullaniciAdi=${KullaniciAdi}`,
       );
 
       if (response.data.state === 'NOK') {
@@ -38,19 +38,16 @@ function Home() {
     }
   }
 
-
   const [inputModalVisible, setInputModalVisible] = React.useState(false);
-  
 
-  function handleInputToggle(){
-      setInputModalVisible(!inputModalVisible);
+  function handleInputToggle() {
+    setInputModalVisible(!inputModalVisible);
   }
 
   // function handleSendContent(event) {
   //       handleInputToggle();
   //       sendContent(event);
   // }
-
 
   const _render = ({item}) => {
     return (
@@ -63,7 +60,6 @@ function Home() {
           borderRadius: 12,
           elevation: 1,
         }}>
-        
         <View>
           <Text style={{fontSize: 22, marginLeft: 10, color: '#18A558'}}>
             {item.BitkiAd}
@@ -79,7 +75,6 @@ function Home() {
 
   return (
     <>
-
       <View style={{flex: 1, backgroundColor: '#fff'}}>
         <Header />
         <View>
@@ -96,15 +91,14 @@ function Home() {
           }}
           renderItem={_render}
         />
-         <FloatingButton icon="plus" onPress={handleInputToggle}/>
+        <FloatingButton icon="plus" onPress={handleInputToggle} />
 
-        <ContentInputModal 
+        <ContentInputModal
           visible={inputModalVisible}
           onClose={handleInputToggle}
           //onSend={handleSendContent}
         />
       </View>
-     
     </>
   );
 }
