@@ -19,11 +19,11 @@ function Profile(props) {
   const CikisYap = async event => {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
       const response = await axios.post(
-        'http://192.168.1.106:45455/api/cebimdekiBahcivan/CikisYap',
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/CikisYap',
         {
           KullaniciAdi,
         },
@@ -80,7 +80,7 @@ function Profile(props) {
           <View style={{flexDirection: 'row', marginBottom: 10}}>
             <Ionicons name={'bookmarks-outline'} color="gray" size={22} />
             <Text style={{paddingLeft: 15, fontSize: 18}}>
-              Kaydedilen Bitkiler
+              Favorilere Eklenen Bitkiler
             </Text>
           </View>
         </TouchableOpacity>
@@ -98,7 +98,7 @@ function Profile(props) {
           <View style={{flexDirection: 'row', marginBottom: 10}}>
             <Ionicons name={'bookmarks-outline'} color="gray" size={22} />
             <Text style={{paddingLeft: 15, fontSize: 18}}>
-              Kaydedilen Blog Yazıları
+              Favorilere Eklenen Blog Yazıları
             </Text>
           </View>
         </TouchableOpacity>

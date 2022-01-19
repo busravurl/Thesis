@@ -55,14 +55,13 @@ function Blog() {
     return (
       <View
         style={{
-          flexDirection: 'row',
           padding: 15,
           marginBottom: 20,
           backgroundColor: '#ffffff',
           borderRadius: 12,
           elevation: 1,
         }}>
-        <View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={{fontSize: 22, marginLeft: 10, color: '#18A558'}}>
             {item.Baslik}
           </Text>
@@ -72,7 +71,8 @@ function Blog() {
             color="#07381d"
             size={30}
             onPress={() => KaydedilenlereGonder(item)}></Ionicons>
-
+        </View>
+        <View>
           <Text style={{fontSize: 14, marginLeft: 10}}>{item.Aciklama}</Text>
         </View>
       </View>

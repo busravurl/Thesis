@@ -18,12 +18,12 @@ import KaydedilenBlogYazilari from './pages/KaydedilenBlogYazilari';
 
 import colors from './styles/colors';
 
-const HomeTab = 'Home';
-const SearchTab = 'Search';
-const CameraTab = 'Camera';
+const HomeTab = 'Bahçem';
+const SearchTab = 'Arama';
+const CameraTab = 'Kamera';
 const BlogTab = 'Blog';
-const SuggestTab = 'Suggest';
-const ProfileTab = 'Profile';
+const SuggestTab = 'Öneri';
+const ProfileTab = 'Profil';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -128,17 +128,17 @@ export default () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="AuthStack"
           component={AuthStack}
           options={{headerShown: false}}
-        /> */}
+        />
 
         <Stack.Screen
           name="Cebimdeki Bahçıvan"
           component={DrawerTab}
           options={{
-            headerShown: false
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

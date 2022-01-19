@@ -21,11 +21,11 @@ function Home() {
   async function fetchData() {
     try {
       const response1 = await axios.get(
-        'http://192.168.1.106:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
+        'http://192.168.1.45:45455/api/cebimdekiBahcivan/SonKullaniciGetir',
       );
       KullaniciAdi = response1.data.content[0].KullaniciAdi;
       const response = await axios.get(
-        `http://192.168.1.106:45455/api/cebimdekiBahcivan/BenimBahcemBitkiListele?KullaniciAdi=${KullaniciAdi}`,
+        `http://192.168.1.45:45455/api/cebimdekiBahcivan/BenimBahcemBitkiListele?KullaniciAdi=${KullaniciAdi}`,
       );
 
       if (response.data.state === 'NOK') {
@@ -45,8 +45,7 @@ function Home() {
   }
 
   function handleSendContent(event) {
-        handleInputToggle();
-        
+    handleInputToggle();
   }
 
   const _render = ({item}) => {
